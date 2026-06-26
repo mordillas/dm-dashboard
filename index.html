@@ -69,7 +69,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:#fafcff}
 <body>
 <div class="tab-bar">
   <span class="tab-title">DM Nomination Progress</span>
-  <span class="refreshed">Refreshed June 26, 2026 at 2:22 PM ET</span>
+  <span class="refreshed">Refreshed June 26, 2026 at 2:40 PM ET</span>
   <button class="tab active" onclick="switchTab('august')">August 2026</button>
 <button class="tab " onclick="switchTab('july')">July 2026</button>
 <button class="tab " onclick="switchTab('june')">June 2026</button>
@@ -266,7 +266,7 @@ function render(m){
           <div class="bar-fill" style="width:${fw}%;background:${barColor(pct)}"></div>
           <div class="bar-target" style="left:${tgtPos}%"></div>
         </div>
-        <span class="bar-val">${r.NOMINATIONS_COUNT}/${(r.TARGET_MIN!==undefined&&r.TARGET_MIN!==Math.round(r.TARGET*0.8))?r.TARGET_MIN+'-'+r.TARGET:r.TARGET}</span>
+        <span class="bar-val">${r.NOMINATIONS_COUNT}/${r.TARGET}</span>
       </div></td>
       <td>${r.REMAINING}</td>
       <td><strong>${pct.toFixed(1)}%</strong></td>
