@@ -71,7 +71,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:#fafcff}
 <body>
 <div class="tab-bar">
   <span class="tab-title">DM Follow-Up Progress</span>
-  <span class="refreshed">Refreshed July 02, 2026 at 1:07 PM ET</span>
+  <span class="refreshed">Refreshed July 02, 2026 at 1:32 PM ET</span>
   <button class="tab active" onclick="switchTab('july')">July 2026</button>
 <button class="tab " onclick="switchTab('june')">June 2026</button>
 <button class="tab " onclick="switchTab('may')">May 2026</button>
@@ -215,7 +215,13 @@ function renderMgr(m) {
     mg.missing += r.MISSING_FOLLOWUP;
     mg.total++;
   });
-  const mgrs = Object.values(mgrMap).sort((a,b) => (b.both/b.total) - (a.both/a.total));
+  const mgrs = Object.values(mgrMap).sort((a,b) => {
+    const bpA=a.both/a.total, bpB=b.both/b.total;
+    if(bpB!==bpA) return bpB-bpA;
+    const s1A=a.s1only/a.total, s1B=b.s1only/b.total;
+    if(s1B!==s1A) return s1B-s1A;
+    return (a.neither/a.total)-(b.neither/b.total);
+  });
   const MEDALS = ['#D4AF37','#9E9E9E','#8B6914'];
   const el = document.getElementById(`mgr-view-${m}`);
   if (!mgrs.length) { el.innerHTML='<div class="no-results">No managers match filters.</div>'; return; }
@@ -228,7 +234,7 @@ function renderMgr(m) {
   const rowsHtml = mgrs.map((mg,i) => {
     const bothPct = mg.total > 0 ? mg.both / mg.total * 100 : 0;
     const col = bothPct>=80?'#2E844A':bothPct>=50?'#DD7A01':'#C23934';
-    const chipBg = i<3 ? MEDALS[i] : col;
+    const chipBg = (i<3 && mg.both>0) ? MEDALS[i] : col;
     const rank = ['1st','2nd','3rd'][i] || (i+1)+'th';
     const segs = [
       {count:mg.s1only, color:'#DD7A01', tip:'S1 only'},
