@@ -71,7 +71,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:#fafcff}
 <body>
 <div class="tab-bar">
   <span class="tab-title">DM Follow-Up Progress</span>
-  <span class="refreshed">Refreshed July 02, 2026 at 11:46 AM ET</span>
+  <span class="refreshed">Refreshed July 02, 2026 at 12:08 PM ET</span>
   <button class="tab active" onclick="switchTab('july')">July 2026</button>
 <button class="tab " onclick="switchTab('june')">June 2026</button>
 <button class="tab " onclick="switchTab('may')">May 2026</button>
@@ -163,7 +163,7 @@ function buildPage(m){
           <th data-col="EMAILED" data-m="${m}">Emailed</th>
           <th data-col="CALLED" data-m="${m}">Called</th>
           <th data-col="MISSING_FOLLOWUP" data-m="${m}">Missing</th>
-          <th data-col="PCT_WORKED" data-m="${m}" class="asc">% Worked</th>
+          <th data-col="PCT_WORKED" data-m="${m}" class="desc">% Worked</th>
           <th data-col="STATUS" data-m="${m}">Status</th>
           <th class="tat-col">TAT (days to complete)</th>
         </tr></thead>
@@ -346,7 +346,7 @@ document.addEventListener('click',e=>{
   render(m);
 });
 
-MONTH_KEYS.forEach(m=>{sortState[m]={col:'PCT_WORKED',dir:1};document.getElementById(`page-${m}`).innerHTML=buildPage(m);});
+MONTH_KEYS.forEach(m=>{sortState[m]={col:'PCT_WORKED',dir:-1};document.getElementById(`page-${m}`).innerHTML=buildPage(m);});
 MONTH_KEYS.forEach(m=>render(m));
 </script>
 </body>
